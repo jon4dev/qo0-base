@@ -59,6 +59,9 @@ namespace M
 	/* calculate next tick position */
 	Vector	ExtrapolateTick(const Vector& p0, const Vector& v0);
 
+	float Deg2rad(float angle);
+	float Rad2deg(float angle);
+
 	// Exports
 	inline RandomSeedFn				RandomSeed;
 	inline RandomFloatFn			RandomFloat;

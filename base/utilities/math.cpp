@@ -156,3 +156,11 @@ Vector M::ExtrapolateTick(const Vector& p0, const Vector& v0)
 	// position formula: p0 + v0t
 	return p0 + (v0 * I::Globals->flIntervalPerTick);
 }
+
+float M::Deg2rad(float angle) {
+	return (float)((M_PI / 180) * angle);
+}
+
+float M::Rad2deg(float angle) {
+	return (float)((180 / M_PI) * angle);
+}
