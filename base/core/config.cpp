@@ -9,7 +9,7 @@
 
 bool C::Setup(std::string_view szDefaultFileName)
 {
-	// create directory "settings" in "%userprofile%\documents\.qo0" if it incorrect or doesnt exists
+	// create directory "settings" in "%userprofile%\documents\.kbk" if it incorrect or doesnt exists
 	if (!std::filesystem::is_directory(fsPath))
 	{
 		std::filesystem::remove(fsPath);
@@ -35,8 +35,8 @@ bool C::Save(std::string_view szFileName)
 {
 	// check for extension if it is not our replace it
 	std::filesystem::path fsFilePath(szFileName);
-	if (fsFilePath.extension() != XorStr(".qo0"))
-		fsFilePath.replace_extension(XorStr(".qo0"));
+	if (fsFilePath.extension() != XorStr(".kbk"))
+		fsFilePath.replace_extension(XorStr(".kbk"));
 
 	// get utf-8 full path to config
 	const std::string szFile = std::filesystem::path(fsPath / fsFilePath).u8string();
@@ -309,7 +309,7 @@ bool C::Load(std::string_view szFileName)
 void C::Remove(std::string_view szFileName)
 {
 	// unable delete default config
-	if (!szFileName.compare(XorStr("default.qo0")))
+	if (!szFileName.compare(XorStr("default.kbk")))
 		return;
 
 	// get utf-8 full path to config
@@ -325,7 +325,7 @@ void C::Refresh()
 
 	for (const auto& it : std::filesystem::directory_iterator(fsPath))
     {
-		if (it.path().filename().extension() == XorStr(".qo0"))
+		if (it.path().filename().extension() == XorStr(".kbk"))
 		{
 			L::Print(fmt::format(XorStr("found configuration file: {}"), it.path().filename().u8string()));
 			vecFileNames.push_back(it.path().filename().u8string());
@@ -352,7 +352,7 @@ std::filesystem::path C::GetWorkingPath()
 	if (PWSTR pszPathToDocuments; SUCCEEDED(SHGetKnownFolderPath(FOLDERID_Documents, 0UL, nullptr, &pszPathToDocuments)))
 	{
 		fsWorkingPath.assign(pszPathToDocuments);
-		fsWorkingPath.append(XorStr(".qo0"));
+		fsWorkingPath.append(XorStr(".kbk"));
 		CoTaskMemFree(pszPathToDocuments);
 	}
 	
