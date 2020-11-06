@@ -414,6 +414,9 @@
     <ClInclude Include="features\backtrack.h">
       <Filter>include\features</Filter>
     </ClInclude>
+    <ClInclude Include="utilities\kit_parser.hpp">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="features\antiaim.cpp">
@@ -541,6 +544,9 @@
     </ClCompile>
     <ClCompile Include="features\backtrack.cpp">
       <Filter>source\features</Filter>
+    </ClCompile>
+    <ClCompile Include="utilities\kit_parser.cpp">
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

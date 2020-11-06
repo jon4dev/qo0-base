@@ -142,6 +142,11 @@ public:
 		return std::sqrtf(this->x * this->x + this->y * this->y + this->z * this->z);
 	}
 
+	[[nodiscard]] float Length2D() const
+	{
+		return std::sqrtf(this->x * this->x + this->y * this->y);
+	}
+
 	[[nodiscard]] constexpr float LengthSqr() const
 	{
 		return this->x * this->x + this->y * this->y + this->z * this->z;
