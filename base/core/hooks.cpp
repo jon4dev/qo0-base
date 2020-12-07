@@ -412,6 +412,7 @@ void FASTCALL H::hkFrameStageNotify(IBaseClientDll* thisptr, int edx, EClientFra
 		 * data has been received and we are going to start calling postdataupdate
 		 * e.g. resolver or skinchanger and other visuals
 		 */
+
 		if (C::Get<bool>(Vars.bSkinChanger))
 			CSkinChanger::Get().Run();
 		break;
@@ -431,6 +432,7 @@ void FASTCALL H::hkFrameStageNotify(IBaseClientDll* thisptr, int edx, EClientFra
 		 * received all packets, now do interpolation, prediction, etc
 		 * e.g. backtrack stuff
 		 */
+
 		CBacktrack::Get().update(pLocal);
 		break;
 	}
@@ -483,13 +485,15 @@ void FASTCALL H::hkFrameStageNotify(IBaseClientDll* thisptr, int edx, EClientFra
 
 			// my solution is here cuz camera offset is dynamically by standard functions without any garbage in overrideview hook
 			I::Input->bCameraInThirdPerson = bThirdPerson && pLocal->IsAlive() && !I::Engine->IsTakingScreenshot();
-			if (I::Input->bCameraInThirdPerson) {
-				I::Prediction->SetLocalViewAngles(G::angRealView);
-				pLocal->UpdateClientSideAnimations();
-			}
 			I::Input->vecCameraOffset.z = bThirdPerson ? C::Get<float>(Vars.flWorldThirdPersonOffset) : 150.f;
 		
 		}
+
+		auto anim_state = pLocal->GetAnimationState();
+
+		anim_state->Update(G::angRealView);
+
+		pLocal->UpdateClientSideAnimations();
 
 		break;
 	}
